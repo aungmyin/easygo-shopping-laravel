@@ -1,4 +1,4 @@
-FROM php:8.4-fpm
+FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     mariadb-client \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
@@ -19,10 +20,12 @@ WORKDIR /app
 
 COPY . /app
 
+RUN mkdir -p /app/bootstrap/cache /app/storage
+
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
+RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache
 
-EXPOSE 9000
+EXPOSE 8000
 
-CMD ["php-fpm"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

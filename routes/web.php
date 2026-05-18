@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\{
     AdminUserController,
 };
 
+Route::redirect('/', '/admin/login');
+Route::redirect('/login', '/admin/login')->name('login');
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // ── Auth (no middleware) ──────────────────────────────────────────────

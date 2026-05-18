@@ -1,4 +1,25 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: easygo-app
+    ports:
+      - "8001:8000"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=easy_go_shopping
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=laravel
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - easygo
+
   mysql:
     image: mysql:8.0
     container_name: easygo-mysql
@@ -16,12 +37,20 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - easygo
 
   redis:
     image: redis:7-alpine
     container_name: easygo-redis
     ports:
       - "6379:6379"
+    networks:
+      - easygo
 
 volumes:
   mysql_data:
+
+networks:
+  easygo:
+    driver: bridge
