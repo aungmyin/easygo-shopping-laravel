@@ -22,6 +22,11 @@ class Order extends Model
     public function user(): BelongsTo  { return $this->belongsTo(User::class); }
     public function items(): HasMany   { return $this->hasMany(OrderItem::class); }
 
+    public function getRouteKeyName(): string
+    {
+        return 'order_number';
+    }
+
     protected static function boot()
     {
         parent::boot();
