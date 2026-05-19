@@ -20,12 +20,16 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p /app/bootstrap/cache /app/storage
+RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache
+RUN npm ci && npm run build
+
+RUN php artisan storage:link
+
+RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD sh -c "php artisan migrate --force && php artisan db:seed --class=CategorySeeder && php artisan db:seed --class=AdminSeeder && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
