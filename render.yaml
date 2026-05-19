@@ -11,8 +11,6 @@ services:
         value: production
       - key: APP_DEBUG
         value: "true"
-      - key: APP_KEY
-        value: "base64:qZFqUB8gO7Q1XdzJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJ="
       - key: APP_URL
         value: "https://easygo-shopping-laravel.onrender.com"
       - key: LOG_CHANNEL
