@@ -21,5 +21,7 @@ services:
         value: file
       - key: QUEUE_CONNECTION
         value: sync
+      - key: VIEW_CACHE_PATH
+        value: "/tmp"
       - key: SANCTUM_STATEFUL_DOMAINS
         value: "easygo-shopping-laravel.onrender.com"
