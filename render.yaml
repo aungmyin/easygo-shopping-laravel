@@ -5,10 +5,16 @@ services:
     plan: free
     dockerfile: ./Dockerfile
     envVars:
+      - key: APP_NAME
+        value: "Easy Go Shopping"
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: "false"
+        value: "true"
+      - key: APP_KEY
+        value: "base64:qZFqUB8gO7Q1XdzJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJjVvJ="
+      - key: APP_URL
+        value: "https://easygo-shopping-laravel.onrender.com"
       - key: LOG_CHANNEL
         value: stderr
       - key: CACHE_DRIVER
@@ -18,4 +24,4 @@ services:
       - key: QUEUE_CONNECTION
         value: sync
       - key: SANCTUM_STATEFUL_DOMAINS
-        value: "*.onrender.com"
+        value: "easygo-shopping-laravel.onrender.com"
