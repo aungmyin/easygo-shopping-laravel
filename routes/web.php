@@ -10,7 +10,15 @@ use App\Http\Controllers\Admin\{
     AdminUserController,
 };
 
-Route::redirect('/', '/admin/login');
+Route::get('/', function () {
+    return response()->json([
+        'status' => 'ok',
+        'app' => 'Easy Go Shopping',
+        'api' => '/api/v1',
+        'docs' => 'Check GitHub: https://github.com/aungmyin/easygo-shopping-laravel'
+    ]);
+});
+
 Route::redirect('/login', '/admin/login')->name('login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
