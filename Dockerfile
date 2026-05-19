@@ -24,10 +24,6 @@ RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-RUN npm ci && npm run build
-
-RUN php artisan storage:link
-
 RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
 EXPOSE 8000
