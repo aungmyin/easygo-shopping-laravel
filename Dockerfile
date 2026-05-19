@@ -22,11 +22,12 @@ COPY . /app
 
 RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage
 
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader && \
+    test -f vendor/autoload.php || (echo "Composer install failed!" && exit 1)
 
 RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
-RUN php artisan key:generate --force || true
+RUN php artisan key:generate --force
 
 EXPOSE 8000
 
