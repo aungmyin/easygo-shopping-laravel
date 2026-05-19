@@ -14,12 +14,11 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage
+RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage && \
+    chmod -R 777 /app/bootstrap/cache /app/storage /app/public/storage
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader && \
     test -f vendor/autoload.php || (echo "Composer install failed!" && exit 1)
-
-RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
 RUN cp .env.example .env && php artisan key:generate --force
 
