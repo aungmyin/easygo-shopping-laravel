@@ -11,12 +11,17 @@ use App\Http\Controllers\Admin\{
 };
 
 Route::get('/', function () {
-    return response()->json([
-        'status' => 'ok',
-        'app' => 'Easy Go Shopping',
-        'api' => '/api/v1',
-        'docs' => 'Check GitHub: https://github.com/aungmyin/easygo-shopping-laravel'
-    ]);
+    try {
+        return response()->json([
+            'status' => 'ok',
+            'app' => 'Easy Go Shopping',
+            'api' => '/api/v1',
+            'docs' => 'Check GitHub: https://github.com/aungmyin/easygo-shopping-laravel'
+        ]);
+    } catch (\Exception $e) {
+        \Log::error('Home route error: ' . $e->getMessage());
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
 });
 
 Route::redirect('/login', '/admin/login')->name('login');

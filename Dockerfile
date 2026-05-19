@@ -28,4 +28,4 @@ RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
 EXPOSE 8000
 
-CMD sh -c "php artisan key:generate --force 2>/dev/null || true && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
+CMD sh -c "php artisan key:generate --force 2>/dev/null || true && php artisan config:clear 2>/dev/null || true && php artisan cache:clear 2>/dev/null || true && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"
