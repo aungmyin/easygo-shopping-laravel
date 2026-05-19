@@ -1,17 +1,3 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
-
-createInertiaApp({
-  title: (title) => `${title} — Easy Go Shopping Admin`,
-  resolve: (name) =>
-    resolvePageComponent(
-      `./Pages/${name}.vue`,
-      import.meta.glob<typeof import('*.vue')>('./Pages/**/*.vue'),
-    ),
-  setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .mount(el)
-  },
-})
+// Demo app - API focused
+console.log('Easy Go Shopping API Server Running');
+console.log('API Base URL: /api/v1');
