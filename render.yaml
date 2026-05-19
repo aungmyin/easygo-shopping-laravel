@@ -11,26 +11,6 @@ services:
         value: "false"
       - key: LOG_CHANNEL
         value: stderr
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_HOST
-        fromDatabase:
-          name: easygo-db
-          property: host
-      - key: DB_PORT
-        value: "3306"
-      - key: DB_DATABASE
-        fromDatabase:
-          name: easygo-db
-          property: database
-      - key: DB_USERNAME
-        fromDatabase:
-          name: easygo-db
-          property: username
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: easygo-db
-          property: password
       - key: CACHE_DRIVER
         value: file
       - key: SESSION_DRIVER
@@ -39,10 +19,3 @@ services:
         value: sync
       - key: SANCTUM_STATEFUL_DOMAINS
         value: "*.onrender.com"
-
-  - type: pserv
-    name: easygo-db
-    databaseName: easy_go_shopping
-    plan: free
-    ipAllowList: []
-    maxConnections: 20
