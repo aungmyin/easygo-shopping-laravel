@@ -21,7 +21,7 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader && \
 
 RUN chown -R 1000:1000 /app/storage /app/bootstrap/cache /app/public
 
-RUN php artisan key:generate --force
+RUN cp .env.example .env && php artisan key:generate --force
 
 EXPOSE 8000
 
