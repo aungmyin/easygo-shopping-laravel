@@ -16,7 +16,7 @@ services:
       - key: LOG_CHANNEL
         value: stderr
       - key: CACHE_DRIVER
-        value: file
+        value: array
       - key: SESSION_DRIVER
         value: file
       - key: QUEUE_CONNECTION
