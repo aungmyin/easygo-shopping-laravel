@@ -14,8 +14,8 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p /app/bootstrap/cache /app/storage /app/public/storage && \
-    chmod -R 777 /app/bootstrap/cache /app/storage /app/public/storage
+RUN mkdir -p /app/bootstrap/cache /app/storage/framework/sessions /app/storage/framework/cache /app/storage/logs /app/public/storage && \
+    chmod -R 777 /app/bootstrap /app/storage /app/public
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader && \
     test -f vendor/autoload.php || (echo "Composer install failed!" && exit 1)
